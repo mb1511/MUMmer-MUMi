@@ -93,6 +93,6 @@ def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19):
                         n2_l = int(line[line.rfind(' ') + 1:])
                         
             # get MUMi
-            m = str(give_mumi.get(from_text=o, l1=n1_l, l2=n2_l))
+            m = '%.5f' % give_mumi.get(from_text=o, l1=n1_l, l2=n2_l)
     
     return '\t'.join((n1_nam, n2_nam, m))
