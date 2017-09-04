@@ -19,7 +19,7 @@ import fasta
 __author__ = 'Matt Brewer'
 __contact__ = 'mb1511@bristol.ac.uk'
 
-mummer = 'path_to/mummer'
+mummer = 'path_to/mummer' # is set during setup
 
 def single_run(genome1, genome2, name1='genome1', name2='genome2', k=19):
     '''Sinlge pairwise analysis'''
