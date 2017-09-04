@@ -1,7 +1,7 @@
 '''
 MUMmer Index value (MUMi) from MUMmer file
 
-Translated from give_mumi.pl (from MUMmer/Sripts)
+Translated from give_mumi.pl (from MUMmer/Scripts)
 Further optimisations can definitely be made
 '''
 
