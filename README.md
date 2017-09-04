@@ -62,7 +62,8 @@ Contact me at mb1511@bristol.ac.uk for any more information
 give_mumi.py is directly translated from the included Perl script (give_mumi.pl) in the mummer 
 package, but optimised for speed and efficiency as it is easier to communicate with from the
 main script. The result is slightly (but not hugely) different with 3 significant figures of
-similarity most of the time.
+similarity most of the time. I have much less experience with Perl, so please feel free to point
+out any errors in translation.
 
 The __init__.py, multi.py and fasta.py are tools and utils from a larger project and have been 
 stripped of some code, but feel free to use what is there for your own endeavours :)
