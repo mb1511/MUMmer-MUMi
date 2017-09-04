@@ -19,7 +19,7 @@ import fasta
 __author__ = 'Matt Brewer'
 __contact__ = 'mb1511@bristol.ac.uk'
 
-mummer = 'C:/GitHub/mummer.exe'
+mummer = 'path_to/mummer'
 
 def single_run(genome1, genome2, name1='genome1', name2='genome2', k=19):
     '''Sinlge pairwise analysis'''
@@ -96,9 +96,3 @@ def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19):
             m = str(give_mumi.get(from_text=o, l1=n1_l, l2=n2_l))
     
     return '\t'.join((n1_nam, n2_nam, m))
-
-
-
-
-
-    
