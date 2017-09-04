@@ -52,4 +52,4 @@ Other Notes:
 	similarity most of the time.
 	
 	The __init__.py, multi.py and fasta.py are tools and utils from a larger project and have been 
-	stripped of some code, but feel free to copy/use what is there for your own endeavours :)
+	stripped of some code, but feel free to use what is there for your own endeavours :)
