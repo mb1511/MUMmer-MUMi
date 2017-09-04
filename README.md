@@ -41,7 +41,8 @@ k = minimum unique match length for mummer
 name1/name2 = return names (only applies to single_run; names for batch_run are simply input files)
 
 IMPORTANT:
-	use "if __name__ == '__main__':" statement to prevent infinite process spawning!
+
+use if __name__ == '__main__' statement to prevent infinite process spawning!
 	
 # Bugs & Changes:
 
