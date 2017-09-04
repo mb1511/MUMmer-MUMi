@@ -131,7 +131,7 @@ class Sequence(object):
         assert frame in range(1,7)
         if align_to_dna:
             space = '  '
-            start = ' ' * (frame % 3 if frame % 3 !=0 else 3)
+            start = ' ' * (frame % 3 if frame % 3 != 0 else 3)
         else:
             space = ''
             start = ''
@@ -149,7 +149,7 @@ def __fasta_read_from_file(file_path):
             try:
                 line = next(s)  # is file empty?
             except StopIteration:
-                raise IOError() # raising IOError to catch exception
+                raise IOError()
            
             while True:
                 if '>' in line:
@@ -177,7 +177,7 @@ def __fasta_read_from_file(file_path):
                     except StopIteration:
                         break
     except IOError:
-        raise IOError('%s is empty' % file_path)
+        raise IOError('%s cannot be found or is empty' % file_path)
 
 def __fasta_read_from_text(text):
     '''generator function that reads text and yields sequence objects'''
@@ -187,7 +187,7 @@ def __fasta_read_from_text(text):
         i = 0
         line = next(s)                   
     except StopIteration:
-        raise IOError() # raising IOError to catch exception
+        raise StopIteration('FASTA read from text: supplied text is empty')
    
     while True:
         if '>' in line:
