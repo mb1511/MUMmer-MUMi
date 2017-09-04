@@ -15,12 +15,14 @@ Deloger M, El Karoui M, Petit MA. J Bacteriol. 2009 Jan; 191(1):91-9. doi: 10.11
 
 # Installation:
 
-	Download and install MUMmer from: http://mummer.sourceforge.net/
+Download and install MUMmer from: http://mummer.sourceforge.net/
 	
-	If not already installed, run:
+If not already installed, run:
+
 	pip install dill
 
-	Run:
+Run:
+
 	./setup.py install path_to/mummer_executable
 
 
