@@ -1,5 +1,4 @@
-# MUMmer-MUMi
-MUMmer & MUMi Python API
+# MUMmer & MUMi Python API
 
 # Description:
 
