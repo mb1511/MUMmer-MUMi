@@ -35,6 +35,6 @@ setup(
     author_email='mb1511@bristol.ac.uk',
     license='GPLv3',
     packages=['mumi'],
-    install_requires=['dill'],
+    install_requires=['dill', 'numpy'],
     zip_safe=False)
 
