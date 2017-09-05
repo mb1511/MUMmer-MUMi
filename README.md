@@ -20,6 +20,7 @@ Download and install MUMmer from: http://mummer.sourceforge.net/
 If not already installed, run:
 
 	pip install dill
+	pip install numpy
 
 Run:
 
