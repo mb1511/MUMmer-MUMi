@@ -1,6 +1,7 @@
 import mumi
 if __name__ == '__main__':
 	# important to make call to mumi only when on main process
+	# if mummer is not on sys path, set mumi.mummer = 'path/to/mummer'
 	print 'Batch Run:'
 	print mumi.batch_run('files', ext='fna', num_threads=4, k=19)
 	print 'Single Comparison:'
