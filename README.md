@@ -2,7 +2,7 @@
 
 # Description:
 
-Simple script to perform multiple pairwise comparisons of > 1 genomes using MUMmer and MUMi
+Simple script to perform multiple pairwise comparisons of > 1 genomes using MUMmer and MUMi.
 Works best with shorter genomes (< 5 M bases)
 
 114 ~2.2 M base genomes on intel i7-4790 @3.6 GHz with 8 threads approx. 1 hour to produce 6555
@@ -40,7 +40,7 @@ num_threads = number of cpus to use (only applies to batch_run)
 
 ext = file extension to use within directory e.g. .fna, .fasta, .fas (only applies to batch_run)
 
-k = minimum unique match length for mummer
+k = minimum unique match (MUM) length for mummer. NOTE: k should be > 14 to avoid non-specific MUMs and longer processing time; k = 19 works best for most cases.
 
 name1/name2 = return names (only applies to single_run; names for batch_run are simply input files)
 
