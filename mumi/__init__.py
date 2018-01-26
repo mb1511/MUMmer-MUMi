@@ -18,16 +18,29 @@ import fasta
 
 __author__ = 'Matt Brewer'
 __contact__ = 'mb1511@bristol.ac.uk'
+__version__ = 0.6
 
-mummer = 'path_to/mummer' # is set during setup
+mummer = None
+
+def check_mummer():
+    if mummer:
+        return True
+    try:
+        sp.Popen(['mummer', '-h'], stdout=sp.PIPE, stderr=sp.PIPE)
+        return True
+    except OSError:
+        print('Could not find mummer on PATH. Set mumi.mummer to path/to/mummer.')
+        return False
 
 def single_run(genome1, genome2, name1='genome1', name2='genome2', k=19):
     '''Sinlge pairwise analysis'''
-    return next(run([genome1, genome2, name1, name2, k]))
+    if check_mummer():
+        return next(run([genome1, genome2, name1, name2, k]))
 
 def batch_run(directory, ext='fna', num_threads=8, k=19):
     '''Run MUMi on mulitple CPUs'''
-            
+    if not check_mummer():
+        return
     assert num_threads <= cpu_count()
 
     files = glob.glob(directory + '/*.%s' % ext)
@@ -43,12 +56,14 @@ def batch_run(directory, ext='fna', num_threads=8, k=19):
                 n2_nam = os.path.splitext(os.path.basename(f2))[0]
                 n_map.append((f1, f2, n1_nam, n2_nam))
     
-    return '\n'.join(run(arg_list=n_map, k=k, cores=num_threads))
+    return '\n'.join(run(arg_list=n_map, k=k, cores=num_threads, mp=mummer))
 
 @multi.map_list
-def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19):
+def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19, mp=''):
     '''Return MUMi value for 2 genomes'''
     # seq generators
+    if not mp:
+        mp = 'mummer'
     n1_s = fasta.fasta_read(n1)
     n2_s = fasta.fasta_read(n2)
     
@@ -67,7 +82,7 @@ def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19):
                 f2.write(seq.seq)
             
             cmd = [
-                mummer, '-mum', 
+                mp, '-mum', 
                 '-b', 
                 '-c', 
                 '-l', 
