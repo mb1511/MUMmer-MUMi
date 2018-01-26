@@ -3,9 +3,12 @@ Module to set up functions to run on separate processes
 
 Requires dill (run "pip install dill" if not already installed)
 '''
+from __future__ import print_function
 
 from multiprocessing import Pool, cpu_count, Manager
 from contextlib import closing
+import sys
+import traceback
 import dill as pickle
 import types
 
@@ -19,13 +22,19 @@ def worker(g, e, *args, **kw):
     '''
     ex = None
     if not e.is_set():
+        # check to see if an error has been raise on any other
+        # process, and short-circuit in that case
         try:
             r = pickle.loads(g)(*args, **kw)
             # successful return
             return (0, r)
         except Exception as ex:
-            # prematurely end all tasks
+            # prematurely end all tasks that have not yet started
             e.set()
+            # print out traceback without raising exception
+            # allow process to end gracefully - will print all
+            # tracebacks for processes if error is common to all
+            traceback.print_exc(file=sys.stderr)
             # abnormal exit caused by exception
             return (1, ex)
     else:
@@ -61,7 +70,7 @@ def map_list(f):
 
     IMPORTANT - decorated functions cannot have functions as arguments
     
-    Note - Only use for inherintly slow functions (>1 sec execution
+    Note - Only use for inherintly slow functions (>10 sec execution
            time) as it is not as efficient as explicitly hard coding
     '''
     def wrap(*args, **kw):
@@ -79,12 +88,10 @@ def map_list(f):
         m = Manager()
         event = m.Event()
         with closing(Pool(processes=cores)) as pool:
-            res = [
-                pool.apply_async(
-                    worker,
-                    args=[g, event] + list(a),
-                    kwds=kw)
-                for a in arg_list]
+            res = [pool.apply_async(
+                worker,
+                args=[g, event] + list(a),
+                kwds=kw) for a in arg_list]
             for r in res:
                 r = r.get()
                 if not r[0]:
@@ -94,6 +101,8 @@ def map_list(f):
                         event.set()
                     error_in_func = r[1]
         # raise errors on parent process
+        # process-specific traceback is 
+        # printed before exception is raised
         if error_in_func:
             raise error_in_func
     return wrap
@@ -103,12 +112,16 @@ def _test_map(out, some_kw=1):
     # kwargs are universal for all called functions if specified as a kw
     return (out, some_kw)
 
+def _print_all(gen):
+    for i in gen:
+        print(i)
+
 if __name__ == '__main__':
     # examples
     # add 'cores=x' to run on x cpus, default = 1
-    print next(_test_map('b', some_kw=20))
-    print next(_test_map('b', 'c', some_kw=20))
-    print next(_test_map(arg_list=[1,2,3,4,5], some_kw=5))
-    print next(_test_map(arg_list=[(1,1),(2,2),(3,3),(4,4),(5,5)], cores=4))
+    _print_all(_test_map('b', some_kw=20))
+    _print_all(_test_map('b', 'c', some_kw=20))
+    _print_all(_test_map(arg_list=[1,2,3,4,5], some_kw=5))
+    _print_all(_test_map(arg_list=[(1,1),(2,2),(3,3),(4,4),(5,5)]))
     x = (('a%d' % i,) for i in xrange(10))
-    print next(_test_map(arg_list=x))
+    _print_all(_test_map(arg_list=x))
