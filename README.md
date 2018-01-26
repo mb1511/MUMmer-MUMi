@@ -24,14 +24,15 @@ If not already installed, run:
 
 Run:
 
-	./setup.py install path_to/mummer_executable
+	./setup.py install
 
 
 # Usage:
 
 	import mumi
-
+	
 	if __name__ == '__main__':
+		mumi.mummer = PATH_TO/mummer # if mummer is not on SYS_PATH
 		mumi.batch_run(directory='PATH_TO/DIRECTORY', ext='fna', num_threads=4, k=19)
 		mumi.single_run('PATH_TO/genome1', 'PATH_TO/genome2', name1='genome1', name2='genome2', k=19)
 
