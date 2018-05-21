@@ -35,7 +35,7 @@ def check_mummer():
 def single_run(genome1, genome2, name1='genome1', name2='genome2', k=19):
     '''Sinlge pairwise analysis'''
     if check_mummer():
-        return next(run([genome1, genome2, name1, name2, k]))
+        return next(run([genome1, genome2, name1, name2, k, mummer]))
 
 def batch_run(directory, ext='fna', num_threads=8, k=19):
     '''Run MUMi on mulitple CPUs'''
@@ -89,7 +89,6 @@ def run(n1, n2, n1_nam='genome1', n2_nam='genome2', k=19, mp=''):
                 '%d' % k,
                 f1.name,
                 f2.name]
-              
             # run MUMmer
             output = sp.Popen(
                 cmd,
