@@ -1,6 +1,6 @@
 # MUMmer & MUMi Python API
 
-# Description:
+## Description:
 
 Simple script to perform multiple pairwise comparisons of > 1 genomes using MUMmer and MUMi.
 Works best with shorter genomes (< 5 M bases)
@@ -13,10 +13,11 @@ See paper below for information about MUMmer and MUMi:
 A genomic distance based on MUM indicates discontinuity between most bacterial species and genera. 
 Deloger M, El Karoui M, Petit MA. J Bacteriol. 2009 Jan; 191(1):91-9. doi: 10.1128/JB.01202-08
 
-# Installation:
+## Installation:
 
 Download and install MUMmer from: http://mummer.sourceforge.net/
-	
+(requires gcc and make - use something like Cygwin/MinGW if using Windows)
+
 If not already installed, run:
 
 	pip install dill
@@ -27,7 +28,7 @@ Run:
 	./setup.py install
 
 
-# Usage:
+## Usage:
 
 	import mumi
 	
@@ -53,19 +54,19 @@ use
 
 statement to prevent infinite process spawning!
 	
-# Bugs & Changes:
+## Bugs & Changes:
 
 Please report any bugs with (preferably) or w/o suggested fixes
 
 Contact me at mb1511@bristol.ac.uk for any more information
 	
-# Other Notes:
+## Other Notes:
 	
-give_mumi.py is directly translated from the included Perl script (give_mumi.pl) in the mummer 
+`give_mumi.py` is directly translated from the included Perl script (`give_mumi.pl`) in the mummer 
 package, but optimised for speed and efficiency as it is easier to communicate with from the
 main script. The result is slightly (but not hugely) different with 3 significant figures of
 similarity most of the time. I have much less experience with Perl, so please feel free to point
 out any errors in translation.
 
-The __init__.py, multi.py and fasta.py are tools and utils from a larger project and have been 
+The `__init__.py`, `multi.py` and `fasta.py` are tools and utils from a larger project and have been 
 stripped of some code, but feel free to use what is there for your own endeavours :)
